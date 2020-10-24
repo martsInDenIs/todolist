@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Change your task</title>
+        <meta charset="utf-8"/>
+        <script>
+            function forMonth(val){
+                let option = document.getElementById("month");
+                option.children[val-1].selected = true;
+                console.log("option");
+            }
+            function dayInMonth(){
+                console.log(document.getElementById("month").value);
+                switch(+document.getElementById("month").value){
+                    case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                        document.getElementById("day").max = '31';
+                        break;
+                    case 4: case 6: case 9: case 11:
+                        document.getElementById("day").max = '30';
+                        break;
+                    case 2:
+                        document.getElementById("day").max = (document.getElementById("year").value % 4 == 0) ? '29' : '28';
+                        break;
+                    default:
+                        console.log("Ya ne znayu pochemu, no tut poyavilas ochibka(");
+                        break;
+                }
+            }
+        </script>
+    </head>
+    <body onload = 'forMonth({{task.month}})'>
+        <h1>Change your task</h1>
+        <form action = '/tasks/update/{{task.id}}' method="POST">
+            <div>
+                <p>Input: </p>
+                <input type="number" name = 'day' id = 'day' placeholder="day" min = '1' max="31" value = "{{task.day}}" required>
+                <select name = 'month' id = 'month' onchange="dayInMonth()" required>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <input type="number" name = 'year' placeholder="year" id = 'year' min = '2020' value = '{{task.year}}' onchange="dayInMonth()" required>
+                <input type="time" name = "time" placeholder="time" value="{{task.time}}" required>
+            </div>
+            <textarea name ='text' placeholder="Input text" rows="5" style="width: 421px; resize: none;" required>{{task.text}}</textarea>
+            <input type="submit" value="Change">
+        </form>
+        <p><a href = '/tasks'>Return to list of tasks</a></p>
+    </body>
+</html>

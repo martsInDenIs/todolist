@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ToDoList</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <p><a href = '/create'>Create account</a></p>
+        <h1>Please, sign in or register</h1>
+        <form action = '/' method="POST"> 
+            <input name = "login" placeholder="Enter your name"><br>
+            <br>
+            <input type = "password" name = "password" placeholder="Enter your password">
+            <input type = "submit" value = "Log In">
+        </form>
+        {{error}}
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create user</title>
+        <meta charset="utf-8">
+        <script>
+            function passwordIsCorrect(){
+                let password = document.getElementById("pswrd").nodeValue;
+                let repeatePassword = document.getElementById("rptpswrd").nodeValue;
+                console.dir(repeatePassword);
+                console.dir(password);
+                if(password != repeatePassword){
+                    alert("Your password not equal check field!");
+                    return false;
+                }
+                return true;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Input your personal data</h1>
+        <form onsubmit = "return passwordIsCorrect();" action = '/create' method="POST">
+            <input name = 'login' placeholder="Input your login" required = "true">
+            <br><br>
+            <input type = "email" name = 'email' placeholder="Input your email" required = 'true'>
+            <br><br>
+            <input type = "password" name = 'password' id = 'pswrd' minlength="4" placeholder="Input your password" required = 'true'>
+            <br><br>
+            <input type = "password" name = 'repeatePassword' id = 'rptpswrd' minlength="4" placeholder="Repeate your password" required = 'true'>
+            <br><br> 
+            <input type = "submit" value="Create">
+        </form>
+        {{error}}
+    </body>
+</html>
